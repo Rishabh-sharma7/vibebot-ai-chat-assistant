@@ -5,7 +5,8 @@ import { ChatInput } from './ChatInput';
 import { FileUpload } from './FileUpload';
 import { Bot, LogOut, Loader2, History } from 'lucide-react';
 
-const API_BASE = "http://127.0.0.1:8001";
+const API_BASE =
+  import.meta.env.VITE_API_URL;
 
 const sendMessage = async (message: string, fileContext: string = "") => {
   const lower = message.toLowerCase().trim();
