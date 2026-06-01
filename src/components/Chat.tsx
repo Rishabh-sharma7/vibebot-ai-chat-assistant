@@ -295,7 +295,7 @@ export function Chat() {
 
   return (
     <div className="h-screen flex flex-col bg-gray-50">
-      <header className="bg-white border-b px-6 py-4 flex justify-between">
+      <header className="bg-white border-b px-4 md:px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-3">
           <div className="bg-blue-600 p-2 rounded-full">
             <Bot className="w-6 h-6 text-white" />
@@ -309,8 +309,8 @@ export function Chat() {
         </button>
       </header>
 
-      <div className="flex flex-1 overflow-hidden">
-        <div className="w-72 border-r bg-white p-4 overflow-y-auto">
+      <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
+        <div className="hidden md:block md:w-72 border-r bg-white p-4 overflow-y-auto">
           <div className="flex items-center gap-2 mb-4">
             <History className="w-5 h-5" />
             <h2 className="font-semibold">Chat History</h2>
@@ -364,7 +364,7 @@ export function Chat() {
           <ChatInput onSend={handleSendMessage} disabled={loading || !sessionId} />
         </div>
 
-        <div className="w-80 border-l p-4 bg-white">
+        <div className="hidden lg:block lg:w-80 border-l p-4 bg-white">
           <h2 className="font-semibold mb-4">Documents</h2>
 
           {uploading && (
