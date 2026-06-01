@@ -6,7 +6,8 @@ import { FileUpload } from './FileUpload';
 import { Bot, LogOut, Loader2, History } from 'lucide-react';
 
 const API_BASE =
-  import.meta.env.VITE_API_URL;
+  import.meta.env.VITE_BACKEND_URL ||
+  "https://vibebot-backend.onrender.com";
 
 const sendMessage = async (message: string, fileContext: string = "") => {
   const lower = message.toLowerCase().trim();
@@ -35,7 +36,7 @@ const sendMessage = async (message: string, fileContext: string = "") => {
     ? `${API_BASE}/generate-image`
     : `${API_BASE}/chat`;
 
-  const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/chat`, {
+  const res = await fetch(endpoint, {
   method: "POST",
   headers: {
     "Content-Type": "application/json"
