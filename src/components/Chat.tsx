@@ -86,6 +86,8 @@ export function Chat() {
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [showSidebar, setShowSidebar] = useState(false);
+  const [showFiles, setShowFiles] = useState(false);
 
   useEffect(() => {
     bootChat();
@@ -295,22 +297,38 @@ export function Chat() {
 
   return (
     <div className="h-screen flex flex-col bg-gray-50">
-      <header className="bg-white border-b px-4 md:px-6 py-4 flex justify-between items-center">
-        <div className="flex items-center gap-3">
-          <div className="bg-blue-600 p-2 rounded-full">
-            <Bot className="w-6 h-6 text-white" />
-          </div>
-          <h1 className="text-xl font-semibold">VibeBot</h1>
-        </div>
+    <header className="bg-white border-b px-4 md:px-6 py-4 flex justify-between items-center">
+  <div className="flex items-center gap-3">
+    <div className="bg-blue-600 p-2 rounded-full">
+      <Bot className="w-6 h-6 text-white" />
+    </div>
+    <h1 className="text-xl font-semibold">VibeBot</h1>
+  </div>
 
-        <button onClick={handleSignOut} className="flex gap-2 items-center">
-          <LogOut className="w-4 h-4" />
-          Sign Out
-        </button>
-      </header>
+  {/* Mobile buttons */}
+  <div className="flex gap-2 md:hidden">
+    <button onClick={() => setShowSidebar(!showSidebar)}>
+      <History />
+    </button>
+    <button onClick={() => setShowFiles(!showFiles)}>
+      📄
+    </button>
+  </div>
 
-      <div className="flex flex-col md:flex-row flex-1 overflow-hidden">
-        <div className="hidden md:block md:w-72 border-r bg-white p-4 overflow-y-auto">
+  <button onClick={handleSignOut} className="flex gap-2 items-center">
+    <LogOut className="w-4 h-4" />
+    <span className="hidden md:inline">Sign Out</span>
+  </button>
+</header>
+
+      <div className="flex flex-1 overflow-hidden flex-col md:flex-row">
+        <div
+  className={`
+    ${showSidebar ? "block" : "hidden"}
+    md:block
+    w-full md:w-72 border-r bg-white p-4 overflow-y-auto
+  `}
+>
           <div className="flex items-center gap-2 mb-4">
             <History className="w-5 h-5" />
             <h2 className="font-semibold">Chat History</h2>
@@ -364,7 +382,13 @@ export function Chat() {
           <ChatInput onSend={handleSendMessage} disabled={loading || !sessionId} />
         </div>
 
-        <div className="hidden lg:block lg:w-80 border-l p-4 bg-white">
+        <div
+  className={`
+    ${showFiles ? "block" : "hidden"}
+    lg:block
+    w-full lg:w-80 border-l p-4 bg-white
+  `}
+>
           <h2 className="font-semibold mb-4">Documents</h2>
 
           {uploading && (

@@ -82,9 +82,9 @@ export function ChatMessage({
             )}
           </div>
         ) : (
-          <div className="text-gray-800 whitespace-pre-wrap leading-relaxed text-sm sm:text-base">
-            {content}
-          </div>
+          <div className="p-3 rounded-lg break-words whitespace-pre-wrap">
+  {content}
+</div>
         )}
       </div>
     </div>
