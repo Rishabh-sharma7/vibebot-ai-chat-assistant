@@ -1,3 +1,5 @@
+from fileinput import filename
+
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -193,7 +195,7 @@ def generate_image(req: ChatRequest):
         with open(filepath, "wb") as f:
             f.write(image_bytes)
 
-        local_url = f"http://127.0.0.1:8001/generated_images/{filename}"
+        local_url = f"https://vibebot-backend.onrender.com/generated_images/{filename}"
 
         return {
             "reply": local_url,

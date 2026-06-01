@@ -12,7 +12,9 @@ interface ChatRequest {
   fileContext: Array<{ filename: string; content: string }>;
 }
 
-Deno.serve(async (req: Request) => {
+const deno = (globalThis as any).Deno;
+
+deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response(null, {
       status: 200,
@@ -23,7 +25,7 @@ Deno.serve(async (req: Request) => {
   try {
     const { message, fileContext }: ChatRequest = await req.json();
 
-    const groqApiKey = Deno.env.get("GROQ_API_KEY");
+    const groqApiKey = deno.env.get("GROQ_API_KEY");
 
     if (!groqApiKey) {
       throw new Error("GROQ_API_KEY not configured");
