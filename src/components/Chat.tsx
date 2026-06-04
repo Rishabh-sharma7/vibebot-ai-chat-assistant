@@ -41,7 +41,10 @@ const sendMessage = async (message: string, fileContext: string = "") => {
   headers: {
     "Content-Type": "application/json"
   },
-  body: JSON.stringify({ message })
+  body: JSON.stringify({
+  message,
+  fileContext
+})
 });
 
   const data = await res.json();
